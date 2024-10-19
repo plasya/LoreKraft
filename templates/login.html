@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flashes">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+            <h2>Welcome Back</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-container">
+                        <input type="password" id="password" class="custom-input" name="password" placeholder="Enter password" required>
+                        <img src="{{ url_for('static', filename='hide.png') }}" alt="Show/Hide" id="peekaboo" class="input-icon">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Sign In</button>
+                <div class="forgot-password">
+                    <a href="#">Forgot username or password?</a>
+                </div>
+                <div class="create-account">
+                    <span>Don't have an account?</span>
+                    <a href="#">Create new account</a>
+                </div>
+                <div class="social-login">
+                    <span>Or sign in with</span>
+                    <div class="social-icons">
+                        <a href="#"><img style="width:30px;" src="{{ url_for('static', filename='google.png') }}" alt="Gmail"></a>
+                        <!-- <a href="#"><img style="width:30px;" src="{{ url_for('static', filename='facebook.png') }}" alt="Facebook"></a> -->
+                        <a href="#"><img style="width:30px;" src="{{ url_for('static', filename='snapchat.png') }}" alt="Snapchat"></a>
+                        <!-- <a href="#"><img style="width:30px;" src="{{ url_for('static', filename='twitter.png') }}" alt="Twitter"></a> -->
+                        <a href="#"><img style="width:30px;" src="{{ url_for('static', filename='email.png') }}" alt="Email"></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
+
+</body>
+</html>
