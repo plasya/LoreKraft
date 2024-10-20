@@ -129,10 +129,10 @@ class Map:
 
         return -1  # Return -1 if the node is not found in the map
 
-    def print_map(self):
-        for i in self.test.values():
-            print(i)
-            print('===========================')
+    # def print_map(self):
+    #     for i in self.test.values():
+    #         print(i)
+    #         print('===========================')
 
 # Function to create a new map with random events
 def create_new_map(d, start, end):
@@ -155,7 +155,7 @@ def map_to_dict(map_obj):
 def main():
     # Generate a new DND map with the theme and checkpoints
     m = create_new_map(d, start=start, end=end)
-    print(m.print_map())
+    # print(m.print_map())
     print(map_to_dict(m))
 # Run the main function
 if __name__ == "__main__":

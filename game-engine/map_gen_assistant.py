@@ -1,13 +1,13 @@
 from openai import OpenAI
 import os
 import json
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
 
 # Load API keys from environment variables
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = "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"
 
 # Initialize OpenAI client
 client = OpenAI(api_key=openai_api_key)
@@ -23,15 +23,15 @@ def generate_dnd_map(theme, checkpoints=10):
 Generate a DND map and the story based on the given theme and the number of checkpoints. The map must contain a starting point and an ending point, with at least 4 sequential checkpoints and the rest being either sequential or parallel paths.
 
 # Instructions:
-1. The output should always be a dictionary named `dnd_map` where the keys are unique place names, such as 'Goblin Fortress' or 'Ancient Shrine', and the values are lists of places they lead to.
+1. The output should always be a dictionary named `dnd_map` where the keys are unique place names, such as "Goblin Fortress" or "Ancient Shrine", and the values are lists of places they lead to.
 2. Ensure the following structure:
     - The `Start` point must lead to one or more specific places.
     - The `End` point must be reached at the conclusion and have no parallel paths after it.
-3. The 'Start' and 'End' points must have unique and specific names (e.g., 'Village Outskirts' for Start, and 'Royal Citadel' for End).
+3. The "Start" and "End" points must have unique and specific names (e.g., "Village Outskirts" for Start, and "Royal Citadel" for End).
 4. All locations must be connected — no disconnected or isolated points.
 5. Avoid infinite loops or circular paths unless it serves a specific purpose, and ensure they eventually lead to the `End`.
 6. There must be at least 4 levels of sequential paths. Each level can contain branching paths, but the path should still eventually lead to the `End`.
-7. The names of places (e.g., 'Goblin Fortress', 'Dragon's Lair', 'Ancient Shrine') should be randomly generated, ensuring variety in each map.
+7. The names of places (e.g., "Goblin Fortress", "Dragon"s Lair", "Ancient Shrine") should be randomly generated, ensuring variety in each map.
 8. Each node that leads to an empty list should represent a dead end in the game.
 
 """ }, 
@@ -47,7 +47,7 @@ Generate a DND map and the story based on the given theme and the number of chec
         temperature=0.7
     )
 
-    # Extract the generated map from the assistant's response
+    # Extract the generated map from the assistant"s response
     dnd_map_code = completion.choices[0].message.content.strip()
 
     # Safely extract the dictionary portion
@@ -57,8 +57,8 @@ Generate a DND map and the story based on the given theme and the number of chec
         map_code_str = dnd_map_code[start:end]  # Extract just the dictionary string
         dnd_map = eval(map_code_str)  # Evaluate the string safely to get the Python dictionary
     except Exception as e:
-        print(f"Error while parsing map: {e}")
-        return None, None
+        print(f"Error while parsing map: {e}, {map_code_str}")
+        return None,None
 
     # Convert dnd_map to JSON string to pass in the next message
     dnd_map_json = json.dumps(dnd_map)
@@ -87,9 +87,9 @@ Generate a DND map and the story based on the given theme and the number of chec
         start_end_dict = eval(map_code_str)  # Evaluate the string safely to get the Python dictionary
     except Exception as e:
         print(f"Error while parsing start/end points: {e}")
-        return dnd_map, None
+        return dnd_map, [dnd_map.keys()[0], dnd_map.keys()[-1]]
 
-    print("Start and End Points:", start_end_dict)
+    # print("Start and End Points:", start_end_dict)
     return dnd_map, start_end_dict
 
 

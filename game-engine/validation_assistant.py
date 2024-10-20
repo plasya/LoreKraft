@@ -4,14 +4,11 @@ import asyncio
 import json
 from pymongo import MongoClient  # MongoDB integration
 from bson import ObjectId  # To handle ObjectId conversion
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
 
 # Load API keys from environment variables
-openai_api_key = os.getenv("OPENAI_API_KEY")
-mongo_uri = os.getenv("MONGO_URI")  # MongoDB connection URI
+openai_api_key = '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'
+mongo_uri = 'mongodb+srv://joy:lol.java@website.fn5zw.mongodb.net/'  # MongoDB connection URI
 
 # Initialize OpenAI client
 client = OpenAI(api_key=openai_api_key)

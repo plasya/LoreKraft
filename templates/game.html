@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Dashboard</title>
+    <link rel="stylesheet" href="http://54.67.37.79:8000/static/src/game.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="image-slider">
+            <!-- Add images as needed for the slider -->
+            <img src="your-image-1.jpg" alt="Game Scene">
+            <img src="your-image-2.jpg" alt="Game Scene">
+        </div>
+
+        <div class="content">
+            <div class="left-side">
+                <!-- Character Card -->
+                <div class="card">
+                    <h2>Character Card</h2>
+                    <div class="character-info">
+                        <img src="your-character-image.jpg" alt="Character" class="character-avatar">
+                        <div class="character-details">
+                            <p><strong>Name:</strong> Hero</p>
+                            <p><strong>Level:</strong> 10</p>
+                            <p><strong>Class:</strong> Warrior</p>
+                            <p><strong>HP:</strong> 100/100</p>
+                            <p><strong>MP:</strong> 50/50</p>
+                            <p><strong>ATK:</strong> 75</p>
+                            <p><strong>DEF:</strong> 60</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enemy Stats -->
+                <div class="card">
+                    <h2>Enemy Stats</h2>
+                    <div class="enemy-info">
+                        <img src="your-enemy-image.jpg" alt="Enemy" class="enemy-avatar">
+                        <div class="enemy-details">
+                            <p><strong>Name:</strong> Dark Lord</p>
+                            <p><strong>Level:</strong> 15</p>
+                            <p><strong>Type:</strong> Boss</p>
+                            <p><strong>HP:</strong> 200/200</p>
+                            <p><strong>MP:</strong> 100/100</p>
+                            <p><strong>ATK:</strong> 90</p>
+                            <p><strong>DEF:</strong> 80</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chatbot -->
+                    <div class="chatbot">
+                        <h2>Chatbot</h2>
+                        <div class="chat-content" id="chat-content">
+                            <div class="message chatbot-message"><strong>Chatbot:</strong> Welcome to the game! How can I assist you today?</div>
+                        </div>
+                        <input type="text" id="user-input" placeholder="Enter your action">
+                        <button id="submit-action">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

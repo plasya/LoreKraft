@@ -11,16 +11,19 @@ import numpy as np
 # Configure MongoDB connection (example with MongoDB Atlas)
 # Initialize PyMongo
 
-def create_new_map(d, start, end):
-    n_common, n_triggers, n_friendly, n_delayed, delayed_numbers = generate_random_numbers(len(d))
-    return Map(d, start, end, n_common, n_triggers, n_friendly, n_delayed, delayed_numbers)
+# def create_new_map(d, start, end):
+#     n_common, n_triggers, n_friendly, n_delayed, delayed_numbers = generate_random_numbers(len(d))
+#     return Map(d, start, end, n_common, n_triggers, n_friendly, n_delayed, delayed_numbers)
+
+guilds = {}
+
+
 
 app = Flask(__name__)
 app.secret_key = 'I_am_upto_no_good'  # Required for session management and flashing messages
 app.config["MONGO_URI"] = "mongodb+srv://joy:lol.java@website.fn5zw.mongodb.net/Hackathon?retryWrites=true&w=majority"
 CORS(app)
 mongo = PyMongo(app)
-
 
 users = {
     "testuser": "password123",
@@ -60,22 +63,37 @@ def login():
     if username in users and users[username] == password:
         session['username'] = username  # Save the username in the session
         flash('Login successful!', 'success')
-        return redirect(url_for('welcome'))  # Redirect to welcome page
+        return render_template('guild.html') #redirect(url_for('guild_create_join'))  # Redirect to welcome page
     else:
         flash('Invalid username or password. Please try again.', 'error')
         return redirect(url_for('home'))
 
-@app.route('/welcome')
-def welcome():
-    if 'username' in session:
-        username = session['username']
-        return render_template('welcome.html', username=username)
-    else:
-        flash('You are not logged in!', 'error')
-        return redirect(url_for('home'))
+
+@app.route('/game')
+def game():
+    return render_template('game.html')
+
+@app.route('/guild_create_joinpage', methods=['POST'])
+def guild_create_joi():
+    data = request.get_json()
+    gcode = data['guildCode']
+    task = data['task']
+    if task == 'join':
+        if gcode not in guilds:
+            return jsonify({'success':0})
+        session['guildcode'] = gcode  
+    if task == 'create':  
+        if gcode not in guilds:
+            guilds[gcode] = 1
+            session['guildcode'] = gcode  
+        else:
+            return jsonify({'success':0})
+    return jsonify({'success':1}) #redirect(url_for('game'))
+
 
 @app.route('/narato')
 def ttpts():
+    
     return jsonify({'data': "lasya is cutie pie"})
 
 @app.route('/create_new_map', methods=['POST'])

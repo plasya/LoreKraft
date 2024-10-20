@@ -1,14 +1,14 @@
 from map_outline import m
 from pymongo import MongoClient  # MongoDB integration
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import ast
 from openai import OpenAI
 from validation_assistant import get_validation_response
 ##test
 num_players = 3
 player_id = 1
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = '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'
 
 # Initialize OpenAI client
 client = OpenAI(api_key=openai_api_key)

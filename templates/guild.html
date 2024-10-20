@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guild Selection</title>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #1e2235;
+        /* Dark background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        text-align: center;
+        background-color: #1e2235;
+        padding: 30px;
+        border-radius: 12px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 36px;
+        color: white;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .or-container {
+        margin: 20px 0;
+    }
+
+    .or {
+        color: #aaa;
+        font-size: 18px;
+    }
+
+    .btn {
+        padding: 12px 50px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        margin: 10px 0;
+        display: block;
+        width: 220px;
+        text-align: center;
+    }
+
+    .create-btn {
+        background: linear-gradient(90deg, #8e44ad, #3498db);
+        /* Purple to blue gradient */
+    }
+
+    .join-btn {
+        background: linear-gradient(90deg, #1abc9c, #3498db);
+        /* Green to blue gradient */
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hidden class to hide elements */
+    .hidden {
+        display: none !important;
+        /* Ensure it hides everything */
+    }
+
+    /* Form styling */
+    .guild-form,
+    .join-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .guild-input {
+        width: 250px;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    .proceed-btn {
+        background: linear-gradient(90deg, #3498db, #2980b9);
+        /* Blue gradient */
+    }
+
+    .back-btn {
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+    .back-btn:hover {
+        text-decoration: underline;
+    }
+
+    /* Add smooth transition effects to the opacity */
+    #button-container,
+    #guild-form,
+    #join-form {
+        transition: opacity 0.3s ease-in-out;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to the Guild</h1>
+        <div id="button-container" class="button-container">
+            <button id="create-guild" class="btn create-btn">Create Guild</button>
+            <div class="or-container">
+                <span class="or">or</span>
+            </div>
+            <button id="join-guild" class="btn join-btn">Join Guild</button>
+        </div>
+        <!-- Form for guild creation, initially hidden -->
+        <div id="guild-form" class="guild-form hidden">
+            <button id="back-btn" class="back-btn">&larr; Back</button>
+            <input type="text" id="guild-name" class="guild-input" placeholder="Enter guild name">
+            <button id="proceed-btn" class="btn proceed-btn">Proceed</button>
+        </div>
+        <!-- Form for joining a guild, initially hidden -->
+        <div id="join-form" class="join-form hidden">
+            <button id="join-back-btn" class="back-btn">&larr; Back</button>
+            <input type="text" id="guild-code" class="guild-input" placeholder="Enter guild code">
+            <button id="join-proceed-btn" class="btn proceed-btn">Proceed</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+<script type="text/javascript">
+document.getElementById('create-guild').addEventListener('click', () => {
+    // Fade out the button container and show the guild form
+    const buttonContainer = document.getElementById('button-container');
+    const guildForm = document.getElementById('guild-form');
+
+    // Use opacity to create a fade effect
+    buttonContainer.style.opacity = 0;
+
+    // After the fade effect is done, hide the buttons completely
+    setTimeout(() => {
+        buttonContainer.classList.add('hidden');
+        guildForm.classList.remove('hidden'); // Show the guild form
+        guildForm.style.opacity = 1; // Ensure the guild form is visible after the fade
+    }, 300); // Set a short timeout for the fade effect
+});
+
+document.getElementById('back-btn').addEventListener('click', () => {
+    const buttonContainer = document.getElementById('button-container');
+    const guildForm = document.getElementById('guild-form');
+
+    // Hide the form and return the buttons
+    guildForm.style.opacity = 0;
+
+    setTimeout(() => {
+        guildForm.classList.add('hidden');
+        buttonContainer.classList.remove('hidden');
+        buttonContainer.style.opacity = 1;
+    }, 300);
+});
+
+document.getElementById('join-guild').addEventListener('click', () => {
+    // Fade out the button container and show the join form
+    const buttonContainer = document.getElementById('button-container');
+    const joinForm = document.getElementById('join-form');
+
+    // Use opacity to create a fade effect
+    buttonContainer.style.opacity = 0;
+
+    // After the fade effect is done, hide the buttons completely
+    setTimeout(() => {
+        buttonContainer.classList.add('hidden');
+        joinForm.classList.remove('hidden'); // Show the join form
+        joinForm.style.opacity = 1; // Ensure the join form is visible after the fade
+    }, 300); // Set a short timeout for the fade effect
+});
+
+document.getElementById('join-back-btn').addEventListener('click', () => {
+    const buttonContainer = document.getElementById('button-container');
+    const joinForm = document.getElementById('join-form');
+
+    // Hide the form and return the buttons
+    joinForm.style.opacity = 0;
+
+    setTimeout(() => {
+        joinForm.classList.add('hidden');
+        buttonContainer.classList.remove('hidden');
+        buttonContainer.style.opacity = 1;
+    }, 300);
+});
+
+document.getElementById('proceed-btn').addEventListener('click', () => {
+    const guildName = document.getElementById('guild-name').value;
+    if (guildName) {
+        alert(`Guild "${guildName}" created successfully!`);
+    } else {
+        alert('Please enter a guild name.');
+    }
+});
+
+document.getElementById('join-proceed-btn').addEventListener('click', () => {
+    const guildCode = document.getElementById('guild-code').value;
+    if (guildCode) {
+        fetch('/guild_create_joinpage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "guildCode": guildCode,
+                "task": "join"
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json(); // Parses the JSON response
+        })
+        .then(data => {
+            if (data.success === 1) { // Assuming the response contains a "success" field
+                console.log('Guild code entered successfully!');
+            } else {
+                console.error('Failed to enter the guild code. Response:', data);
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    } else {
+        alert('Please enter a valid guild code.');
+    }
+});
+
+
+</script>
+
+</html>
