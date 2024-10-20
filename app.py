@@ -1,8 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from collections import deque
 import random
 import string
 from libs.MapStruct import Map, generate_random_numbers
+from flask_cors import CORS
+from flask_pymongo import PyMongo
+from bson import json_util, ObjectId
+import numpy as np 
+
+# Configure MongoDB connection (example with MongoDB Atlas)
+# Initialize PyMongo
 
 def create_new_map(d, start, end):
     n_common, n_triggers, n_friendly, n_delayed, delayed_numbers = generate_random_numbers(len(d))
@@ -10,15 +17,39 @@ def create_new_map(d, start, end):
 
 app = Flask(__name__)
 app.secret_key = 'I_am_upto_no_good'  # Required for session management and flashing messages
+app.config["MONGO_URI"] = "mongodb+srv://joy:lol.java@website.fn5zw.mongodb.net/Hackathon?retryWrites=true&w=majority"
+CORS(app)
+mongo = PyMongo(app)
 
-# Dummy user data (in real cases, this should come from a database)
+
 users = {
-    "testuser": "password123"
+    "testuser": "password123",
+    "surya": 'qwerty123',
+    "lasya":'lol',
+    "joy": '1121'
 }
 
 @app.route('/')
 def home():
     return render_template('login.html')
+
+@app.route('/test')
+def sometest():
+    try:
+        # Hardcoded MongoDB query similar to SQL:
+        # SELECT * FROM collection_name WHERE image_id IS NOT NULL
+        query = { }
+
+        # Query MongoDB (assuming 'collection_name' is the name of your collection)
+        documents = mongo.db.characters.find(query)
+        # Convert MongoDB cursor to list and then to JSON format
+        data = eval(json_util.dumps(documents))
+        data = [i for i in data if i["image_ids"]]
+
+        return jsonify({"status": "success", "data": data}), 200
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -42,6 +73,11 @@ def welcome():
     else:
         flash('You are not logged in!', 'error')
         return redirect(url_for('home'))
+
+@app.route('/narato')
+def ttpts():
+    return jsonify({'data': "lasya is cutie pie"})
+
 @app.route('/create_new_map', methods=['POST'])
 def create_new_map():
     try:
