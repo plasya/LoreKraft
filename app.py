@@ -7,7 +7,7 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from bson import json_util, ObjectId
 import numpy as np 
-
+from image_gen import image_gen 
 # Configure MongoDB connection (example with MongoDB Atlas)
 # Initialize PyMongo
 
@@ -90,6 +90,12 @@ def guild_create_joi():
             return jsonify({'success':0})
     return jsonify({'success':1}) #redirect(url_for('game'))
 
+@app.route('/imagen', methods = ['POST'])
+def imag_gen():
+    data = request.get_json()
+    p = data["prompt"]
+    str1 = imag_gen(p)
+    return str1
 
 @app.route('/narato')
 def ttpts():
