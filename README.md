@@ -68,7 +68,6 @@ LoreKraft is built on a foundation of **multi-agent collaboration** where each a
 4. **Session Handling at Scale**  
    Ensuring smooth transitions between game states and persistent sessions for multiple players was complex but rewarding.
 
-![Challenges Image](path/to/challenges-image.png)
 
 ---
 ## Implementation
